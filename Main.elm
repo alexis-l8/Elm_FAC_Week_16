@@ -18,15 +18,38 @@ main =
 
 
 type alias Model =
-    { todo : String
-    , todos : List String
+    { entries : List Entry
+    , field : String
+    , uuid : Int
+    }
+
+
+type alias Entry =
+    { description : String
+    , completed : Bool
+    , editing : Bool
+    , id : Int
     }
 
 
 model : Model
 model =
-    { todo = ""
-    , todos = []
+    { entries = []
+    , field = ""
+    , uuid = 0
+    }
+
+
+
+--
+
+
+newEntry : String -> Int -> Entry
+newEntry desc id =
+    { description = desc
+    , completed = False
+    , editing = False
+    , id = id
     }
 
 
@@ -38,51 +61,63 @@ type Msg
     = UpdateTodo String
     | AddTodo
     | RemoveAll
-    | RemoveItem String
-    | ClearInput
+    | RemoveTodo Int
+
+
+
+-- | RemoveItem String
 
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
         UpdateTodo text ->
-            { model | todo = text }
+            { model | field = text }
 
         AddTodo ->
-            { model | todos = model.todo :: model.todos, todo = "" }
+            { model
+                | uuid = model.uuid + 1
+                , field = ""
+                , entries =
+                    if String.isEmpty model.field then
+                        model.entries
+                    else
+                        model.entries ++ [ newEntry model.field model.uuid ]
+            }
 
         RemoveAll ->
-            { model | todos = [] }
+            { model | entries = [] }
 
-        RemoveItem text ->
-            { model | todos = List.filter (\element -> element /= text) model.todos }
-
-        ClearInput ->
-            { model | todo = "" }
+        RemoveTodo id ->
+            { model | entries = List.filter (\todo -> id /= todo.id) model.entries }
 
 
-
--- view
-
-
-todoItem : String -> Html Msg
+todoItem : Entry -> Html Msg
 todoItem todo =
-    li [] [ text todo, button [ onClick (RemoveItem todo) ] [ text "x" ] ]
+    li [ id (toString todo.id) ] [ text todo.description, button [ onClick (RemoveTodo todo.id) ] [ text "x" ] ]
 
 
-todoList : List String -> Html Msg
+
+---
+
+
+todoList : List Entry -> Html Msg
 todoList todos =
     let
         child =
             List.map todoItem todos
     in
-    ul [] child
+        ul [] child
+
+
+
+--
 
 
 view model =
     div []
-        [ input [ type_ "text", onInput UpdateTodo, value model.todo ] []
+        [ input [ type_ "text", onInput UpdateTodo, value model.field ] []
         , button [ onClick AddTodo ] [ text "Submit" ]
         , button [ onClick RemoveAll ] [ text "Remove All" ]
-        , div [] [ todoList model.todos ]
+        , div [] [ todoList model.entries ]
         ]
