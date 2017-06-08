@@ -62,6 +62,7 @@ type Msg
     | AddTodo
     | RemoveAll
     | RemoveTodo Int
+    | CheckTodo Int
 
 
 
@@ -91,10 +92,29 @@ update msg model =
         RemoveTodo id ->
             { model | entries = List.filter (\todo -> id /= todo.id) model.entries }
 
+        CheckTodo id ->
+            { model
+                | entries =
+                    List.map
+                        (\todo ->
+                            if id == todo.id then
+                                { todo
+                                    | completed = not todo.completed
+                                }
+                            else
+                                todo
+                        )
+                        model.entries
+            }
+
 
 todoItem : Entry -> Html Msg
 todoItem todo =
-    li [ id (toString todo.id) ] [ text todo.description, button [ onClick (RemoveTodo todo.id) ] [ text "x" ] ]
+    li [ classList [ ( "completed", todo.completed ) ], id (toString todo.id) ]
+        [ text todo.description
+        , input [ type_ "checkbox", checked todo.completed, onClick (CheckTodo todo.id) ] []
+        , button [ onClick (RemoveTodo todo.id) ] [ text "x" ]
+        ]
 
 
 
