@@ -107,7 +107,7 @@ todoList todos =
         child =
             List.map todoItem todos
     in
-        ul [] child
+    ul [] child
 
 
 
