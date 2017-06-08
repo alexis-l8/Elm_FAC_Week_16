@@ -1,0 +1,16 @@
+{
+  "tasks": [
+    { "id": "1",
+      "task": "setting up a repo",
+      "steps": [],
+      "completed": 0 },
+    { "id": "2",
+      "task": "creating issues",
+      "steps": [],
+      "completed": 0 },
+    { "id": "3",
+      "task": "making my special latte",
+      "steps": [],
+      "completed": 0 }
+  ]
+}

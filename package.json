@@ -1,0 +1,11 @@
+{
+  "name": "Backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/alexis-l8/Elm_FAC_Week_16.git",
+  "author": "<alexislui@hotmail.co.uk>",
+  "license": "MIT",
+  "dependencies": {
+    "json-server": "0.9.5"
+  }
+}
