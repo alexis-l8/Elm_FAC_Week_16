@@ -48,11 +48,8 @@ update msg model =
                 ! []
 
         NewGif (Ok newUrl) ->
-            let
-                log =
-                    Debug.log "yeah" newUrl
-            in
-                ( model, Cmd.none )
+            { model | entries = newUrl }
+                ! []
 
         NewGif (Err err) ->
             let

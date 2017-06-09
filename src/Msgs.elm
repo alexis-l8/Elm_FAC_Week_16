@@ -13,8 +13,8 @@ type Msg
 
 
 type alias Metadata =
-    { id : String
-    , task : String
-    , steps : List Int
-    , completed : Int
+    { description : String
+    , completed : Bool
+    , editing : Bool
+    , id : Int
     }

@@ -1,10 +1,9 @@
 module Main exposing (..)
 
 import Html exposing (program)
-import Html.Attributes exposing (..)
-import Html.Events exposing (..)
 import Http exposing (..)
 import Json.Decode as Decode
+import Json.Encode as Encode
 import Msgs exposing (..)
 import Models exposing (Model)
 import Update exposing (update)
@@ -43,6 +42,42 @@ beginProgram =
 -- update
 -- | RemoveItem String
 ---
+-- post String Http.Body Json.Decode.Decoder a
+--
+-- savePlayerRequest : Metadata -> Http.Request Metadata
+-- savePlayerRequest todo =
+--     Http.request
+--         { body = playerEncoder todo |> Http.jsonBody
+--         , expect = Http.expectJson playerDecoder
+--         , headers = []
+--         , method = "PATCH"
+--         , timeout = Nothing
+--         , url = "http://localhost:4000/tasks"
+--         , withCredentials = False
+--         }
+--
+--
+--
+-- --
+--
+--
+-- savePlayerCmd : Player -> Cmd Msg
+-- savePlayerCmd player =
+--     savePlayerRequest player
+--         |> Http.send Msgs.OnPlayerSave
+--
+--
+-- playerEncoder : Todo -> Encode.Value
+-- playerEncoder todo =
+--     let
+--         attributes =
+--             [ ( "description", Encode.string todo.id )
+--             , ( "completed", Encode.string todo.name )
+--             , ( "editing", Encode.int todo.level )
+--             , ( "id", Encode.int todo.level )
+--             ]
+--     in
+--         Encode.object attributes
 
 
 getTodos =
@@ -57,20 +92,20 @@ getTodos =
 
 
 type alias Metadata =
-    { id : String
-    , task : String
-    , steps : List Int
-    , completed : Int
+    { description : String
+    , completed : Bool
+    , editing : Bool
+    , id : Int
     }
 
 
 decodeMetadata : Decode.Decoder Metadata
 decodeMetadata =
     Decode.map4 Metadata
-        (Decode.field "id" Decode.string)
-        (Decode.field "task" Decode.string)
-        (Decode.field "steps" (Decode.list Decode.int))
-        (Decode.field "completed" Decode.int)
+        (Decode.field "description" Decode.string)
+        (Decode.field "completed" Decode.bool)
+        (Decode.field "editing" Decode.bool)
+        (Decode.field "id" Decode.int)
 
 
 

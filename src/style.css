@@ -24,10 +24,12 @@ body {
 }
 
 input {
-  border: 1px red solid;
   background-color: rgba(255, 165, 0, 0.6);
   color: white;
-  height: 4em;
+}
+
+input[type="text"]{
+  font-size: 2.5em;
 }
 
 button {
@@ -67,4 +69,10 @@ li {
   justify-content: space-around;
   background: rgba(255, 165, 0, 0.6);
   margin: 1em;
+}
+
+li button {
+  border-radius: 2px;
+  padding: 0.4em;
+  margin:1px;
 }
