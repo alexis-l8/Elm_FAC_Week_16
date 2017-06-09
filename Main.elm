@@ -203,9 +203,9 @@ decodeMetadata =
 
 
 view model =
-    div []
+    div [ class "steps" ]
         [ input [ type_ "text", onInput UpdateTodo, value model.field ] []
         , button [ onClick AddTodo ] [ text "Submit" ]
         , button [ onClick RemoveAll ] [ text "Remove All" ]
-        , div [] [ text (toString getTodos) ]
+        , div [] [ todoList model.entries ]
         ]

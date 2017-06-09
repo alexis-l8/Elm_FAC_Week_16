@@ -3,6 +3,23 @@
 
 }
 
+body {
+  background: url('./assets/unsplash.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 .completed{
   text-decoration: line-through;
+}
+
+.steps{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  max-width: 15em;
+  border: 3px solid red;
+  margin-top: 3.5em
 }
