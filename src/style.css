@@ -18,15 +18,14 @@ body {
 .steps{
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  max-width: 20em;
+  width: 20em;
   margin: 0 auto;
   margin-top: 7.1em;
 }
 
 input {
   border: 1px red solid;
-  background-color: rgba(255, 165, 0, 0.5);
+  background-color: rgba(255, 165, 0, 0.6);
   color: white;
   height: 4em;
 }
@@ -49,8 +48,23 @@ button:hover {
     color: white;
 }
 
+ul {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.remove{
+
+}
+
 li {
   list-style-type: none;
-  background: rgba(255, 165, 0, 0.5);
-  padding: 0.5em;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-around;
+  background: rgba(255, 165, 0, 0.6);
+  margin: 1em;
 }

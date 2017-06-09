@@ -12,7 +12,7 @@ todoItem todo =
     li [ classList [ ( "completed", todo.completed ) ], id (toString todo.id) ]
         [ text todo.description
         , input [ type_ "checkbox", checked todo.completed, onClick (CheckTodo todo.id) ] []
-        , button [ onClick (RemoveTodo todo.id) ] [ text "x" ]
+        , button [ class "remove", onClick (RemoveTodo todo.id) ] [ text "x" ]
         ]
 
 
