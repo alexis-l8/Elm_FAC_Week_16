@@ -1,16 +1,19 @@
 {
   "tasks": [
-    { "id": "1",
-      "task": "setting up a repo",
-      "steps": [],
-      "completed": 0 },
-    { "id": "2",
-      "task": "creating issues",
-      "steps": [],
-      "completed": 0 },
-    { "id": "3",
-      "task": "making my special latte",
-      "steps": [],
-      "completed": 0 }
+    { "description": "Do Step 1"
+    , "completed" : false
+    , "editing" : false
+    , "id" : 1
+  },
+  { "description": "Do Step 2"
+  , "completed" : false
+  , "editing" : false
+  , "id" : 2
+},
+{ "description" : "Do Step 3"
+, "completed" : false
+, "editing" : false
+, "id" : 3
+}
   ]
 }
